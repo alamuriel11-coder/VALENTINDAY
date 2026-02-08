@@ -83,7 +83,7 @@
     <!-- PÁGINA FINAL -->
     <div class="love-page" id="lovePage">
 
-        <!-- Música Love Story (se activa con el botón SÍ) -->
+        <!-- Música Love Story (Lyrics oficial, menos ads) -->
         <iframe id="musicFrame" width="0" height="0"
             src=""
             frameborder="0"
@@ -127,9 +127,10 @@
         noBtn.addEventListener("click", moveNoButton);
 
         yesBtn.addEventListener("click", () => {
-            // Activar música (interacción del usuario)
+
+            // Activar música con interacción válida
             musicFrame.src =
-              "https://www.youtube.com/embed/8xg3vE8Ie_E?autoplay=1&loop=1&playlist=8xg3vE8Ie_E";
+              "https://www.youtube-nocookie.com/embed/aXzVF3XeS8M?autoplay=1&loop=1&playlist=aXzVF3XeS8M";
 
             // Cambiar pantalla
             document.body.style.background =
