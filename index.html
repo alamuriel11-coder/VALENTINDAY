@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>San Valentín 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: pink;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Comic Sans MS', cursive;
+            overflow: hidden;
+            transition: background 1s;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #b30059;
+            font-size: 2.5em;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #yesBtn {
+            background: #ff66b2;
+            color: white;
+        }
+
+        #noBtn {
+            background: #ff3333;
+            color: white;
+            position: absolute;
+        }
+
+        .love-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .love-page h1 {
+            color: white;
+            font-size: 2em;
+            padding: 20px;
+        }
+
+        .photo {
+            width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.4);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PÁGINA PRINCIPAL -->
+    <div class="container" id="mainPage">
+        <h1>¿Quieres ser mi San Valentín? 💘</h1>
+        <button id="yesBtn">Sí 😍</button>
+        <button id="noBtn">No 🙄</button>
+    </div>
+
+    <!-- PÁGINA FINAL -->
+    <div class="love-page" id="lovePage">
+
+        <!-- Música Love Story -->
+        <iframe width="0" height="0"
+            src="https://www.youtube.com/embed/8xg3vE8Ie_E?autoplay=1&loop=1&playlist=8xg3vE8Ie_E"
+            frameborder="0"
+            allow="autoplay">
+        </iframe>
+
+        <h1>
+            Sabía que ibas a decir que sí 💕<br><br>
+            sé que no te podías resistir a mis encantos 😏<br><br>
+            te amo mucho amor con todo mi corazón de pollo 🐔❤️
+        </h1>
+
+        <img src="IMG-20260203-WA0136.jpg" class="photo" alt="Nosotros 💖">
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+        const yesBtn = document.getElementById("yesBtn");
+        const mainPage = document.getElementById("mainPage");
+        const lovePage = document.getElementById("lovePage");
+
+        let attempts = 0;
+
+        function moveNoButton() {
+            attempts++;
+
+            if (attempts >= 100) {
+                noBtn.style.display = "none";
+                return;
+            }
+
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 100);
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+        }
+
+        noBtn.addEventListener("mouseover", moveNoButton);
+        noBtn.addEventListener("click", moveNoButton);
+
+        yesBtn.addEventListener("click", () => {
+            document.body.style.background = "linear-gradient(135deg, #ff69b4, #ff1493)";
+            mainPage.style.display = "none";
+            lovePage.style.display = "flex";
+        });
+    </script>
+
+</body>
+</html>
