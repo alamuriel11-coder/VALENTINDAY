@@ -83,9 +83,9 @@
     <!-- PÁGINA FINAL -->
     <div class="love-page" id="lovePage">
 
-        <!-- Música Love Story -->
-        <iframe width="0" height="0"
-            src="https://www.youtube.com/embed/8xg3vE8Ie_E?autoplay=1&loop=1&playlist=8xg3vE8Ie_E"
+        <!-- Música Love Story (se activa con el botón SÍ) -->
+        <iframe id="musicFrame" width="0" height="0"
+            src=""
             frameborder="0"
             allow="autoplay">
         </iframe>
@@ -104,6 +104,7 @@
         const yesBtn = document.getElementById("yesBtn");
         const mainPage = document.getElementById("mainPage");
         const lovePage = document.getElementById("lovePage");
+        const musicFrame = document.getElementById("musicFrame");
 
         let attempts = 0;
 
@@ -126,7 +127,13 @@
         noBtn.addEventListener("click", moveNoButton);
 
         yesBtn.addEventListener("click", () => {
-            document.body.style.background = "linear-gradient(135deg, #ff69b4, #ff1493)";
+            // Activar música (interacción del usuario)
+            musicFrame.src =
+              "https://www.youtube.com/embed/8xg3vE8Ie_E?autoplay=1&loop=1&playlist=8xg3vE8Ie_E";
+
+            // Cambiar pantalla
+            document.body.style.background =
+              "linear-gradient(135deg, #ff69b4, #ff1493)";
             mainPage.style.display = "none";
             lovePage.style.display = "flex";
         });
