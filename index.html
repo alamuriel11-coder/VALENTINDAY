@@ -1,144 +1,145 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>San Valentín 💖</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quieres ser mi San Valentín?</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: pink;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Comic Sans MS', cursive;
-            overflow: hidden;
-            transition: background 1s;
-        }
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background-color:#ffb6d9;
+    overflow:hidden;
+}
 
-        .container {
-            text-align: center;
-        }
+.container{
+    margin-top:150px;
+}
 
-        h1 {
-            color: #b30059;
-            font-size: 2.5em;
-        }
+h1{
+    font-size:40px;
+}
 
-        button {
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            margin: 10px;
-        }
+button{
+    padding:15px 30px;
+    font-size:20px;
+    margin:20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
 
-        #yesBtn {
-            background: #ff66b2;
-            color: white;
-        }
+#yesBtn{
+    background-color:#4CAF50;
+    color:white;
+}
 
-        #noBtn {
-            background: #ff3333;
-            color: white;
-            position: absolute;
-        }
+#noBtn{
+    background-color:#f44336;
+    color:white;
+    position:absolute;
+}
 
-        .love-page {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-        }
+.lovePage{
+    display:none;
+    height:100vh;
+    width:100%;
+    background: linear-gradient(45deg, #ff4e91, #ff9ecf);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
 
-        .love-page h1 {
-            color: white;
-            font-size: 2em;
-            padding: 20px;
-        }
+.invitation{
+    background:white;
+    color:#ff4e91;
+    padding:25px;
+    border-radius:15px;
+    margin-top:25px;
+    font-size:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
 
-        .photo {
-            width: 280px;
-            border-radius: 20px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.4);
-            margin-top: 20px;
-        }
-    </style>
+.cat{
+    width:250px;
+    margin-top:20px;
+    border-radius:15px;
+}
+</style>
 </head>
 
 <body>
 
-    <!-- PÁGINA PRINCIPAL -->
-    <div class="container" id="mainPage">
-        <h1>¿Quieres ser mi San Valentín? 💘</h1>
-        <button id="yesBtn">Sí 😍</button>
-        <button id="noBtn">No 🙄</button>
+<div class="container" id="mainPage">
+    <h1>¿Quieres ser mi San Valentín? 💖</h1>
+    <button id="yesBtn">Sí 😍</button>
+    <button id="noBtn">No 😢</button>
+</div>
+
+<div class="lovePage" id="lovePage">
+    <h1>
+        Sabía que ibas a decir que sí 💕<br><br>
+        Sé que no te podías resistir a mis encantos 😏<br><br>
+        Te amo mucho amor con todo mi corazón de pollo 🐔❤️
+    </h1>
+
+    <div class="invitation">
+        <h2>💌 Nuestra Cita 💌</h2>
+        <p><strong>Nos vemos el 14 de febrero</strong></p>
+        <p><strong>A las 10:00 p.m.</strong></p>
+        <p><strong>En Casa 1900</strong></p>
+        <p>Saltillo, Coahuila</p>
     </div>
 
-    <!-- PÁGINA FINAL -->
-    <div class="love-page" id="lovePage">
+    <img src="IMG-20260203-WA0136.jpg" class="cat">
 
-        <!-- Música Love Story (con tu video elegido) -->
-        <iframe id="musicFrame" width="0" height="0"
-            src=""
-            frameborder="0"
-            allow="autoplay">
-        </iframe>
+    <!-- Música YouTube -->
+    <iframe id="music"
+        width="0"
+        height="0"
+        src=""
+        frameborder="0"
+        allow="autoplay"
+        allowfullscreen>
+    </iframe>
+</div>
 
-        <h1>
-            Sabía que ibas a decir que sí 💕<br><br>
-            sé que no te podías resistir a mis encantos 😏<br><br>
-            te amo mucho amor con todo mi corazón de pollo 🐔❤️
-        </h1>
+<script>
+let noBtn = document.getElementById("noBtn");
+let yesBtn = document.getElementById("yesBtn");
+let lovePage = document.getElementById("lovePage");
+let mainPage = document.getElementById("mainPage");
+let music = document.getElementById("music");
 
-        <img src="IMG-20260203-WA0136.jpg" class="photo" alt="Nosotros 💖">
-    </div>
+let attempts = 0;
 
-    <script>
-        const noBtn = document.getElementById("noBtn");
-        const yesBtn = document.getElementById("yesBtn");
-        const mainPage = document.getElementById("mainPage");
-        const lovePage = document.getElementById("lovePage");
-        const musicFrame = document.getElementById("musicFrame");
+noBtn.addEventListener("mouseover", function(){
+    attempts++;
 
-        let attempts = 0;
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 50);
 
-        function moveNoButton() {
-            attempts++;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-            if (attempts >= 100) {
-                noBtn.style.display = "none";
-                return;
-            }
+    if(attempts >= 100){
+        noBtn.style.display = "none";
+    }
+});
 
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 100);
+yesBtn.addEventListener("click", function(){
+    mainPage.style.display = "none";
+    lovePage.style.display = "flex";
 
-            noBtn.style.left = x + "px";
-            noBtn.style.top = y + "px";
-        }
-
-        noBtn.addEventListener("mouseover", moveNoButton);
-        noBtn.addEventListener("click", moveNoButton);
-
-        yesBtn.addEventListener("click", () => {
-
-            // Activar música con interacción válida (tu video)
-            musicFrame.src =
-              "https://www.youtube-nocookie.com/embed/akPRZ6gzGXk?autoplay=1&loop=1&playlist=akPRZ6gzGXk";
-
-            // Cambiar pantalla
-            document.body.style.background =
-              "linear-gradient(135deg, #ff69b4, #ff1493)";
-            mainPage.style.display = "none";
-            lovePage.style.display = "flex";
-        });
-    </script>
+    music.src = "https://www.youtube-nocookie.com/embed/aXzVF3XeS8M?autoplay=1&loop=1&playlist=aXzVF3XeS8M";
+});
+</script>
 
 </body>
 </html>
