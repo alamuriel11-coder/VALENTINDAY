@@ -10,12 +10,17 @@ body{
     margin:0;
     font-family: Arial, sans-serif;
     text-align:center;
-    background-color:#ffb6d9;
-    overflow:hidden;
 }
 
-.container{
-    margin-top:150px;
+/* PRIMERA PÁGINA */
+#mainPage{
+    height:100vh;
+    background-color:#ffb6d9;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
 }
 
 h1{
@@ -42,13 +47,13 @@ button{
     position:absolute;
 }
 
-.lovePage{
+/* SEGUNDA PÁGINA */
+#lovePage{
     display:none;
     height:100vh;
     width:100%;
     background: linear-gradient(45deg, #ff4e91, #ff9ecf);
     color:white;
-    display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
@@ -64,6 +69,13 @@ button{
     margin-top:25px;
     font-size:20px;
     box-shadow:0 0 20px rgba(0,0,0,0.2);
+    max-width:400px;
+}
+
+.countdown{
+    margin-top:15px;
+    font-size:22px;
+    font-weight:bold;
 }
 
 .cat{
@@ -76,13 +88,13 @@ button{
 
 <body>
 
-<div class="container" id="mainPage">
+<div id="mainPage">
     <h1>¿Quieres ser mi San Valentín? 💖</h1>
     <button id="yesBtn">Sí 😍</button>
     <button id="noBtn">No 😢</button>
 </div>
 
-<div class="lovePage" id="lovePage">
+<div id="lovePage">
     <h1>
         Sabía que ibas a decir que sí 💕<br><br>
         Sé que no te podías resistir a mis encantos 😏<br><br>
@@ -91,15 +103,36 @@ button{
 
     <div class="invitation">
         <h2>💌 Nuestra Cita 💌</h2>
+
         <p><strong>Nos vemos el 14 de febrero</strong></p>
         <p><strong>A las 10:00 p.m.</strong></p>
         <p><strong>En Casa 1900</strong></p>
-        <p>Saltillo, Coahuila</p>
+
+        <p>
+            C. Praxedis de la Peña 331,<br>
+            Zona Centro, 25000<br>
+            Saltillo, Coahuila
+        </p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=C.+Praxedis+de+la+Pe%C3%B1a+331,+Zona+Centro,+25000+Saltillo,+Coahuila"
+           target="_blank"
+           style="
+                display:inline-block;
+                margin-top:10px;
+                padding:10px 20px;
+                background-color:#ff4e91;
+                color:white;
+                text-decoration:none;
+                border-radius:10px;
+                font-weight:bold;">
+            📍 Ver ubicación en Maps
+        </a>
+
+        <div class="countdown" id="countdown"></div>
     </div>
 
     <img src="IMG-20260203-WA0136.jpg" class="cat">
 
-    <!-- Música YouTube -->
     <iframe id="music"
         width="0"
         height="0"
@@ -116,9 +149,11 @@ let yesBtn = document.getElementById("yesBtn");
 let lovePage = document.getElementById("lovePage");
 let mainPage = document.getElementById("mainPage");
 let music = document.getElementById("music");
+let countdown = document.getElementById("countdown");
 
 let attempts = 0;
 
+/* Botón NO huye */
 noBtn.addEventListener("mouseover", function(){
     attempts++;
 
@@ -133,12 +168,37 @@ noBtn.addEventListener("mouseover", function(){
     }
 });
 
+/* Botón SÍ */
 yesBtn.addEventListener("click", function(){
     mainPage.style.display = "none";
     lovePage.style.display = "flex";
 
     music.src = "https://www.youtube-nocookie.com/embed/aXzVF3XeS8M?autoplay=1&loop=1&playlist=aXzVF3XeS8M";
 });
+
+/* CRONÓMETRO */
+let eventDate = new Date("Feb 14, 2026 22:00:00").getTime();
+
+setInterval(function(){
+    let now = new Date().getTime();
+    let distance = eventDate - now;
+
+    if(distance < 0){
+        countdown.innerHTML = "💖 Ya es hora de nuestra cita 💖";
+        return;
+    }
+
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdown.innerHTML = 
+        "⏳ Faltan: " + days + " días, " +
+        hours + " horas, " +
+        minutes + " minutos, " +
+        seconds + " segundos 💕";
+}, 1000);
 </script>
 
 </body>
