@@ -3,202 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¿Quieres ser mi San Valentín?</title>
+<title>Feliz Cumpleaños 💖</title>
 
 <style>
 body{
     margin:0;
-    font-family: Arial, sans-serif;
-    text-align:center;
-}
-
-/* PRIMERA PÁGINA */
-#mainPage{
     height:100vh;
-    background-color:#ffb6d9;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    position:relative;
+    flex-direction:column;
+    text-align:center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #ff9ecf, #ffc3e6, #ff69b4);
+    overflow:hidden;
+    color:white;
 }
 
 h1{
-    font-size:40px;
+    font-size:38px;
+    margin-bottom:10px;
 }
 
-button{
-    padding:15px 30px;
+p{
     font-size:20px;
-    margin:20px;
-    border:none;
-    border-radius:10px;
+}
+
+/* Pastel */
+.cake{
+    position:relative;
+    margin-top:20px;
     cursor:pointer;
 }
 
-#yesBtn{
-    background-color:#4CAF50;
-    color:white;
+.base{
+    width:220px;
+    height:120px;
+    background:#ff69b4;
+    border-radius:15px;
+    position:relative;
 }
 
-#noBtn{
-    background-color:#f44336;
-    color:white;
+.top{
+    width:240px;
+    height:40px;
+    background:#fff;
+    border-radius:20px;
     position:absolute;
+    top:-20px;
+    left:-10px;
 }
 
-/* SEGUNDA PÁGINA */
-#lovePage{
-    display:none;
-    height:100vh;
-    width:100%;
-    background: linear-gradient(45deg, #ff4e91, #ff9ecf);
-    color:white;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-}
-
-.invitation{
+/* Velas */
+.candle{
+    width:8px;
+    height:30px;
     background:white;
-    color:#ff4e91;
-    padding:25px;
-    border-radius:15px;
-    margin-top:25px;
-    font-size:20px;
-    box-shadow:0 0 20px rgba(0,0,0,0.2);
-    max-width:400px;
+    position:absolute;
+    top:-45px;
 }
 
-.countdown{
-    margin-top:15px;
-    font-size:22px;
-    font-weight:bold;
+.flame{
+    width:10px;
+    height:10px;
+    background:orange;
+    border-radius:50%;
+    position:absolute;
+    top:-10px;
+    left:-1px;
+    animation: flicker 0.2s infinite alternate;
 }
 
-.cat{
-    width:250px;
+@keyframes flicker{
+    from{opacity:1;}
+    to{opacity:0.5;}
+}
+
+.hidden{
+    display:none;
+}
+
+/* Confetti */
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+.message{
     margin-top:20px;
-    border-radius:15px;
+    font-size:22px;
+    display:none;
 }
 </style>
 </head>
 
 <body>
 
-<div id="mainPage">
-    <h1>¿Quieres ser mi San Valentín? 💖</h1>
-    <button id="yesBtn">Sí 😍</button>
-    <button id="noBtn">No 😢</button>
+<h1>🎂 Feliz cumpleaños amorsote de mi vida 💖</h1>
+<p>Hoy celebramos tus hermosos 22 años ✨</p>
+
+<div class="cake" onclick="blowCandles()">
+    <div class="base"></div>
+    <div class="top"></div>
+    <div id="candles"></div>
 </div>
 
-<div id="lovePage">
-    <h1>
-        Sabía que ibas a decir que sí 💕<br><br>
-        Sé que no te podías resistir a mis encantos 😏<br><br>
-        Te amo mucho amor con todo mi corazón de pollo 🐔❤️
-    </h1>
-
-    <div class="invitation">
-        <h2>💌 Nuestra Cita 💌</h2>
-
-        <p><strong>Nos vemos el 14 de febrero</strong></p>
-        <p><strong>A las 10:00 p.m.</strong></p>
-        <p><strong>En Casa 1900</strong></p>
-
-        <p>
-            C. Praxedis de la Peña 331,<br>
-            Zona Centro, 25000<br>
-            Saltillo, Coahuila
-        </p>
-
-        <a href="https://www.google.com/maps/search/?api=1&query=C.+Praxedis+de+la+Pe%C3%B1a+331,+Zona+Centro,+25000+Saltillo,+Coahuila"
-           target="_blank"
-           style="
-                display:inline-block;
-                margin-top:10px;
-                padding:10px 20px;
-                background-color:#ff4e91;
-                color:white;
-                text-decoration:none;
-                border-radius:10px;
-                font-weight:bold;">
-            📍 Ver ubicación en Maps
-        </a>
-
-        <div class="countdown" id="countdown"></div>
-    </div>
-
-    <img src="IMG-20260203-WA0136.jpg" class="cat">
-
-    <iframe id="music"
-        width="0"
-        height="0"
-        src=""
-        frameborder="0"
-        allow="autoplay"
-        allowfullscreen>
-    </iframe>
+<div class="message" id="finalMessage">
+    🥹 Sopla tus 22 velitas y pide un deseo...  
+    (yo ya pedí el mío: que siempre estés conmigo 💕)
 </div>
 
 <script>
-let noBtn = document.getElementById("noBtn");
-let yesBtn = document.getElementById("yesBtn");
-let lovePage = document.getElementById("lovePage");
-let mainPage = document.getElementById("mainPage");
-let music = document.getElementById("music");
-let countdown = document.getElementById("countdown");
+let candlesContainer = document.getElementById("candles");
 
-let attempts = 0;
+/* Crear 22 velas */
+for(let i=0;i<22;i++){
+    let candle = document.createElement("div");
+    candle.classList.add("candle");
+    candle.style.left = (10 + i*10) + "px";
 
-/* Botón NO huye */
-noBtn.addEventListener("mouseover", function(){
-    attempts++;
+    let flame = document.createElement("div");
+    flame.classList.add("flame");
 
-    let x = Math.random() * (window.innerWidth - 100);
-    let y = Math.random() * (window.innerHeight - 50);
+    candle.appendChild(flame);
+    candlesContainer.appendChild(candle);
+}
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+/* Soplar */
+function blowCandles(){
+    let flames = document.querySelectorAll(".flame");
+    flames.forEach(f => f.classList.add("hidden"));
 
-    if(attempts >= 100){
-        noBtn.style.display = "none";
+    document.getElementById("finalMessage").style.display="block";
+
+    launchConfetti();
+}
+
+/* Confetti */
+function launchConfetti(){
+    for(let i=0;i<120;i++){
+        let conf = document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left = Math.random()*100+"vw";
+        conf.style.animationDuration = (Math.random()*3+2)+"s";
+        conf.style.backgroundColor = 
+            "hsl(" + Math.random()*360 + ", 100%, 70%)";
+        document.body.appendChild(conf);
     }
-});
-
-/* Botón SÍ */
-yesBtn.addEventListener("click", function(){
-    mainPage.style.display = "none";
-    lovePage.style.display = "flex";
-
-    music.src = "https://www.youtube-nocookie.com/embed/aXzVF3XeS8M?autoplay=1&loop=1&playlist=aXzVF3XeS8M";
-});
-
-/* CRONÓMETRO */
-let eventDate = new Date("Feb 14, 2026 22:00:00").getTime();
-
-setInterval(function(){
-    let now = new Date().getTime();
-    let distance = eventDate - now;
-
-    if(distance < 0){
-        countdown.innerHTML = "💖 Ya es hora de nuestra cita 💖";
-        return;
-    }
-
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdown.innerHTML = 
-        "⏳ Faltan: " + days + " días, " +
-        hours + " horas, " +
-        minutes + " minutos, " +
-        seconds + " segundos 💕";
-}, 1000);
+}
 </script>
 
 </body>
