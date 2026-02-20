@@ -8,32 +8,38 @@
 <style>
 body{
     margin:0;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
     text-align:center;
     font-family: Arial, sans-serif;
     background: linear-gradient(45deg, #ff9ecf, #ffc3e6, #ff69b4);
     overflow:hidden;
     color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:500px;
 }
 
 h1{
-    font-size:38px;
-    margin-bottom:10px;
+    font-size:34px;
+    margin-bottom:25px;
 }
 
-p{
+.subtitle{
     font-size:20px;
+    margin-bottom:40px;
 }
 
 /* Pastel */
 .cake{
     position:relative;
-    margin-top:20px;
+    margin:40px auto;
     cursor:pointer;
+    width:220px;
 }
 
 .base{
@@ -56,7 +62,7 @@ p{
 
 /* Velas */
 .candle{
-    width:8px;
+    width:6px;
     height:30px;
     background:white;
     position:absolute;
@@ -64,7 +70,7 @@ p{
 }
 
 .flame{
-    width:10px;
+    width:8px;
     height:10px;
     background:orange;
     border-radius:50%;
@@ -83,6 +89,13 @@ p{
     display:none;
 }
 
+.message{
+    margin-top:50px;
+    font-size:20px;
+    line-height:1.6;
+    display:none;
+}
+
 /* Confetti */
 .confetti{
     position:absolute;
@@ -97,19 +110,18 @@ p{
         transform: translateY(110vh) rotate(360deg);
     }
 }
-
-.message{
-    margin-top:20px;
-    font-size:22px;
-    display:none;
-}
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>🎂 Feliz cumpleaños amorsote de mi vida 💖</h1>
-<p>Hoy celebramos tus hermosos 22 años ✨</p>
+
+<div class="subtitle">
+Hoy celebramos tus hermosos 22 años ✨
+</div>
 
 <div class="cake" onclick="blowCandles()">
     <div class="base"></div>
@@ -118,18 +130,21 @@ p{
 </div>
 
 <div class="message" id="finalMessage">
-    🥹 Sopla tus 22 velitas y pide un deseo...  
-    (yo ya pedí el mío: que siempre estés conmigo 💕)
+🥹 Sopla tus 22 velitas y pide un deseo...  
+<br><br>
+(yo ya pedí el mío: que siempre estés conmigo 💕)
+</div>
+
 </div>
 
 <script>
 let candlesContainer = document.getElementById("candles");
 
-/* Crear 22 velas */
+/* Crear 22 velas centradas */
 for(let i=0;i<22;i++){
     let candle = document.createElement("div");
     candle.classList.add("candle");
-    candle.style.left = (10 + i*10) + "px";
+    candle.style.left = (8 + i*9) + "px";
 
     let flame = document.createElement("div");
     flame.classList.add("flame");
@@ -138,17 +153,14 @@ for(let i=0;i<22;i++){
     candlesContainer.appendChild(candle);
 }
 
-/* Soplar */
 function blowCandles(){
     let flames = document.querySelectorAll(".flame");
     flames.forEach(f => f.classList.add("hidden"));
 
     document.getElementById("finalMessage").style.display="block";
-
     launchConfetti();
 }
 
-/* Confetti */
 function launchConfetti(){
     for(let i=0;i<120;i++){
         let conf = document.createElement("div");
